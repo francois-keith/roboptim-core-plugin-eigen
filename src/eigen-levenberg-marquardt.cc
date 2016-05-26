@@ -27,6 +27,7 @@
 #include <roboptim/core/solver-error.hh>
 #include <roboptim/core/sum-of-c1-squares.hh>
 
+#include <roboptim/core/plugin/eigen/config.hh>
 #include <roboptim/core/plugin/eigen/eigen-levenberg-marquardt.hh>
 
 #include <unsupported/Eigen/NonLinearOptimization>
@@ -123,6 +124,7 @@ namespace roboptim
 
       // Load <Status, warning message> map
       using namespace Eigen::LevenbergMarquardtSpace;
+#ifndef WIN32
       warning_map_ = boost::assign::map_list_of
         (RelativeReductionTooSmall,
          "The cosine of the angle between fvec and any column of "
@@ -148,6 +150,7 @@ namespace roboptim
         (UserAsked,
          "Error in user-implemented evaluation or gradient "
          "computation.");
+#endif //WIN32
     }
 
     SolverWithJacobian::~SolverWithJacobian ()
@@ -249,27 +252,27 @@ extern "C"
   using namespace roboptim::eigen;
   typedef SolverWithJacobian::parent_t solver_t;
 
-  ROBOPTIM_DLLEXPORT unsigned getSizeOfProblem ();
-  ROBOPTIM_DLLEXPORT const char* getTypeIdOfConstraintsList ();
-  ROBOPTIM_DLLEXPORT solver_t* create (const SolverWithJacobian::problem_t& pb);
-  ROBOPTIM_DLLEXPORT void destroy (solver_t* p);
+  ROBOPTIM_CORE_PLUGIN_EIGEN_DLLEXPORT unsigned getSizeOfProblem ();
+  ROBOPTIM_CORE_PLUGIN_EIGEN_DLLEXPORT const char* getTypeIdOfConstraintsList ();
+  ROBOPTIM_CORE_PLUGIN_EIGEN_DLLEXPORT solver_t* create (const SolverWithJacobian::problem_t& pb);
+  ROBOPTIM_CORE_PLUGIN_EIGEN_DLLEXPORT void destroy (solver_t* p);
 
-  ROBOPTIM_DLLEXPORT unsigned getSizeOfProblem ()
+  ROBOPTIM_CORE_PLUGIN_EIGEN_DLLEXPORT unsigned getSizeOfProblem ()
   {
     return sizeof (solver_t::problem_t);
   }
 
-  ROBOPTIM_DLLEXPORT const char* getTypeIdOfConstraintsList ()
+  ROBOPTIM_CORE_PLUGIN_EIGEN_DLLEXPORT const char* getTypeIdOfConstraintsList ()
   {
     return typeid (solver_t::problem_t::constraintsList_t).name ();
   }
 
-  ROBOPTIM_DLLEXPORT solver_t* create (const SolverWithJacobian::problem_t& pb)
+  ROBOPTIM_CORE_PLUGIN_EIGEN_DLLEXPORT solver_t* create (const SolverWithJacobian::problem_t& pb)
   {
     return new SolverWithJacobian (pb);
   }
 
-  ROBOPTIM_DLLEXPORT void destroy (solver_t* p)
+  ROBOPTIM_CORE_PLUGIN_EIGEN_DLLEXPORT void destroy (solver_t* p)
   {
     delete p;
   }
