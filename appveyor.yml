@@ -4,7 +4,7 @@ branches:
     - dev
 
 configuration:
-- Debug
+- Release
 
 platform:
 - x64
@@ -22,7 +22,7 @@ environment:
 # Do not tinker with the variables below unless you know what you are doing
   SOURCE_FOLDER: C:\devel-src
   CMAKE_INSTALL_PREFIX: C:/devel
-  CMAKE_BUILD_TYPE: Debug
+  CMAKE_BUILD_TYPE: Release
   PATH: C:/devel/bin;C:\Libraries\boost_1_60_0\lib64-msvc-14.0;C:\msys64\mingw64\bin;%PATH%
   PKG_CONFIG_PATH: C:/devel/lib/pkgconfig
   BOOST_ROOT: C:\Libraries\boost_1_60_0
