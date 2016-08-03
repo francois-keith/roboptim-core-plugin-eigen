@@ -49,7 +49,7 @@ build_script:
 test_script:
 - ps: >-
     Set-PSDebug -Trace 2
-    
+
     . ./.travis/functions.ps1
-    
+
     test_project
