@@ -33,7 +33,7 @@ build_script:
 - ps: >-
     Set-PSDebug -Trace 2
 
-    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/francois-keith/testAppveyor/master/installAsAppveyorDependency.ps1'))
+    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/francois-keith/testAppveyor/wip/installAsAppveyorDependency.ps1'))
 
     git submodule update --init --recursive
 
